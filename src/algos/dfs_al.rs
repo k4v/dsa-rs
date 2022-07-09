@@ -1,7 +1,7 @@
 use std::collections::HashSet;
 
 use crate::types::graph::ALGraph;
-use crate::types::graph::GraphValue;
+use crate::types::graph::ALGraphValue;
 
 fn create_graph() -> ALGraph<u32> {
 
@@ -26,7 +26,7 @@ fn create_graph() -> ALGraph<u32> {
     graph
 }
 
-fn run_dfs<T: GraphValue>(graph: &ALGraph<T>) {
+fn run_dfs<T: ALGraphValue>(graph: &ALGraph<T>) {
     let mut visited = HashSet::<T>::new();
 
     for (vertex, _) in graph.into_iter() {
@@ -36,7 +36,7 @@ fn run_dfs<T: GraphValue>(graph: &ALGraph<T>) {
     }
 }
 
-fn run_dfs_internal<T: GraphValue>(
+fn run_dfs_internal<T: ALGraphValue>(
     graph: &ALGraph<T>, root: &T, level: u32, visited: &mut HashSet<T>) {
 
     println!("{}{}", (0..level).map(|_| ".").collect::<String>(), root);

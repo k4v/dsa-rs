@@ -5,6 +5,7 @@ use std::vec::Vec;
 
 use crate::types::graph::PtrGraphNode;
 use crate::types::graph::PtrGraph;
+use crate::types::graph::PtrGraphValue;
 
 fn create_graph() -> PtrGraph<u32> {
     let mut graph: PtrGraph<u32> = Vec::new();
@@ -33,7 +34,7 @@ fn create_graph() -> PtrGraph<u32> {
     graph
 }
 
-fn run_dfs(graph: PtrGraph<u32>) {
+fn run_dfs<T: PtrGraphValue>(graph: PtrGraph<T>) {
     let mut visited = HashSet::<usize>::new();
 
     for node in graph {
@@ -45,8 +46,8 @@ fn run_dfs(graph: PtrGraph<u32>) {
     }
 }
 
-fn run_dfs_internal(
-    root: &Rc<RefCell<PtrGraphNode<u32>>>,
+fn run_dfs_internal<T: PtrGraphValue>(
+    root: &Rc<RefCell<PtrGraphNode<T>>>,
     level: u32, visited: &mut HashSet<usize>) {
 
     // Print spaces equal to level, then print node
@@ -67,7 +68,7 @@ fn run_dfs_internal(
 }
 
 pub fn test_dfs() {
-    let graph = create_graph();
+    let graph: PtrGraph<u32> = create_graph();
     println!();
-    run_dfs(graph);
+    run_dfs::<u32>(graph);
 }
